@@ -10,9 +10,10 @@
  * See https://github.com/Kynako/DirExplorer/blob/main/LICENSE
 */
 
-/* How to use
+/* # Qhick Start
    const fm = FileManager.iCloud()
    const root = fm.documentsDirectory()
+   const DirExplorer = importModule('DirExploror')
    const direx = new DirExplorer()
    let data = direx.process(root)
    let tree = direx.tree(data)   
