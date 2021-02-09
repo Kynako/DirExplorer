@@ -12,7 +12,7 @@
 
 /* How to use
    const fm = FileManager.iCloud()
-   const root = fm.documentDirectory()
+   const root = fm.documentsDirectory()
    const direx = new DirExplorer()
    let data = direx.process(root)
    let tree = direx.tree(data)   
