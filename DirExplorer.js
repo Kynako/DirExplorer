@@ -11,13 +11,12 @@
 */
 
 /* # Qhick Start
+/* How to use
    const fm = FileManager.iCloud()
    const root = fm.documentsDirectory()
    const DirExplorer = importModule('DirExploror')
    const direx = new DirExplorer()
    let data = direx.process(root)
-   let tree = direx.tree(data)   
-   // also you can use `present` option parameter.
    direx.tree(data, true)
 
 */
@@ -43,14 +42,13 @@ class DirExplorer {
     })
   }
   
-  tree(data, present=false, tab='', isRoot=true){
-
+  tree(data, present=false, filter=()=>true, tab='', isRoot=true){
     if(isRoot == true){
       let root = data[0].name + (data[0].isDir 
         ? '/' : '')
       let branches = data[0].isDir
         ? this.tree(
-            data[0].contents, false, '', false
+            data[0].contents, false, filter, '', false
           )
         : null
       let tree = [root, branches]
@@ -60,7 +58,9 @@ class DirExplorer {
       return tree
     }
     let fileList = data.filter(d => !d.isDir)
+      .filter(filter)
     let dirList = data.filter(d => d.isDir)
+      .filter(filter)
     let fTree = fileList.map((file, idx, fileList)=>{
       if(idx != fileList.length-1){
         let text = tab+this.Tline+file.name
@@ -83,7 +83,11 @@ class DirExplorer {
         return [
           text,
           this.tree(
-            dir.contents, false, tab+this.Iline, false
+            dir.contents,
+            false,
+            filter,
+            tab+this.Iline,
+            false
           )
         ]
       } else {
@@ -92,7 +96,11 @@ class DirExplorer {
         return [
           text,
           this.tree(
-            dir.contents, false, tab+this.tab, false
+            dir.contents,
+            false, 
+            filter,
+            tab+this.tab,
+            false
           )
         ]
       }
@@ -126,7 +134,7 @@ class DirExplorer {
         path: path,
         name: this.fm.fileName(path, true),
         hierarky: 0,
-        contents: this.process(path, hierarky, false)
+        contents: this.process(path, hierarky+1, false)
       }]
     } else {
       if(!this.fm.isDirectory(path)){
