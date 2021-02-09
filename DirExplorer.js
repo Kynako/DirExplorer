@@ -1,24 +1,22 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: teal; icon-glyph: project-diagram;
-// icon-color: deep-green; icon-glyph: vector-square;
+// icon-color: teal; icon-glyph: folder-open;
 /*!
  * DirExplorer.js
  *
  * Copyright (c) ©︎ 2021 Kynako
  *
  * This software is released under the MIT license.
- * See https://github.com/Kynako/QiitaWidget/blob/main/LICENSE
+ * See https://github.com/Kynako/DirExplorer/blob/main/LICENSE
 */
+
 /* How to use
    const fm = FileManager.iCloud()
    const root = fm.documentDirectory()
    const direx = new DirExplorer()
    let data = direx.process(root)
-   let tree = direx.tree(data)
-   console.log(tree)
-   
-   // also you can use `present` option
+   let tree = direx.tree(data)   
+   // also you can use `present` option parameter.
    direx.tree(data, true)
 
 */
